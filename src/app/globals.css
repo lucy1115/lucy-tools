@@ -1,26 +1,53 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* 東京地鐵禮儀海報風：黃底、粗黑線、白色漫畫格、網點 */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-metro: #fcd92a;
+  --color-ink: #141414;
+  --font-sans: var(--font-nunito), var(--font-noto-tc), sans-serif;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --animate-bulb: bulb 0.6s ease-in-out infinite;
+  --animate-shake: shake 0.4s ease-in-out infinite;
+  --animate-stick-out: stick-out 0.6s ease-out both;
+  --animate-unfold: unfold 0.6s ease-out both;
+  --animate-wheel-spin: wheel-spin 14s linear infinite;
+  --animate-tie: tie 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+
+  @keyframes bulb {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.25; }
+  }
+  @keyframes shake {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-14deg); }
+    75% { transform: rotate(14deg); }
+  }
+  @keyframes stick-out {
+    from { transform: translateY(100px); }
+    to { transform: translateY(-52px); }
+  }
+  @keyframes tie {
+    from { opacity: 0; transform: translateY(-40px) scale(0.3) rotate(-20deg); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes wheel-spin {
+    to { transform: rotate(360deg); }
+  }
+  @keyframes unfold {
+    from { opacity: 0; transform: scaleY(0.2); }
+    to { opacity: 1; transform: scaleY(1); }
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-metro);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+/* 網點 */
+@utility halftone {
+  background-color: #fff;
+  background-image: radial-gradient(var(--color-ink) 1.3px, transparent 1.5px);
+  background-size: 7px 7px;
 }
